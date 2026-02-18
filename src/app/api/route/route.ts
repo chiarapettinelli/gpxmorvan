@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { loadRouteFromGpx } from "@/lib/gpx";
 
-export async function getRoutePayload() {
+async function getRoutePayload() {
   return loadRouteFromGpx();
 }
 

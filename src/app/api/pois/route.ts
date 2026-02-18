@@ -12,7 +12,7 @@ function parseRadiusKm(request: Request): number {
   return Math.min(10, Math.max(1, Number(raw.toFixed(1))));
 }
 
-export async function getPoisPayload(radiusKm: number): Promise<PoisPayload> {
+async function getPoisPayload(radiusKm: number): Promise<PoisPayload> {
   const pois = await getPoisNearRoute(radiusKm);
   return {
     pois,
