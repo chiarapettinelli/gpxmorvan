@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { loadRouteFromGpx } from "@/lib/gpx";
-
-async function getRoutePayload() {
-  return loadRouteFromGpx();
-}
+import { getRoutePayload } from "@/lib/api/route";
 
 export async function GET(): Promise<Response> {
   try {

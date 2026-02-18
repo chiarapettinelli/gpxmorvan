@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
-import { CircleMarker, MapContainer, Polyline, Popup, TileLayer, useMap } from "react-leaflet";
+import { divIcon } from "leaflet";
+import { CircleMarker, MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from "react-leaflet";
 
 import { nearestPointOnRoute } from "@/lib/geo";
 import { Poi, RoutePoint } from "@/lib/types";
@@ -19,6 +20,13 @@ const categoryStyle = {
   bar: { color: "#b45309", label: "Bar/Cafe" },
   food_shop: { color: "#047857", label: "Commerce alim." }
 } as const;
+
+const bikeSyncIcon = divIcon({
+  html: "🚴",
+  className: "bike-sync-marker",
+  iconSize: [28, 28],
+  iconAnchor: [14, 14]
+});
 
 function FitBounds({ points }: { points: RoutePoint[] }) {
   const map = useMap();
@@ -76,14 +84,7 @@ export function MapView({ points, pois, activeIndex, onHoverIndex, onPoiSelect }
           }}
         />
 
-        {activePoint ? (
-          <CircleMarker
-            pane="markerPane"
-            center={[activePoint.lat, activePoint.lon]}
-            radius={7}
-            pathOptions={{ color: "#f43f5e", fillColor: "#f43f5e", fillOpacity: 1 }}
-          />
-        ) : null}
+        {activePoint ? <Marker pane="markerPane" position={[activePoint.lat, activePoint.lon]} icon={bikeSyncIcon} /> : null}
 
         {pois.map((poi) => {
           const style = categoryStyle[poi.category];

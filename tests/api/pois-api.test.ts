@@ -1,4 +1,5 @@
-import { GET, getPoisPayload } from "@/app/api/pois/route";
+import { GET } from "@/app/api/pois/route";
+import { getPoisPayload } from "@/lib/api/pois";
 import type { Poi } from "@/lib/types";
 import { getPoisNearRoute } from "@/lib/overpass";
 

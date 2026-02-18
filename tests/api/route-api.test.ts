@@ -1,4 +1,5 @@
-import { GET, getRoutePayload } from "@/app/api/route/route";
+import { GET } from "@/app/api/route/route";
+import { getRoutePayload } from "@/lib/api/route";
 
 describe("GET /api/route", () => {
   it("returns route payload and coherent stats", async () => {

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getPoisNearRoute } from "@/lib/overpass";
-import { PoisPayload } from "@/lib/types";
+import { getPoisPayload } from "@/lib/api/pois";
 
 function parseRadiusKm(request: Request): number {
   const { searchParams } = new URL(request.url);
@@ -10,18 +9,6 @@ function parseRadiusKm(request: Request): number {
     return 5;
   }
   return Math.min(10, Math.max(1, Number(raw.toFixed(1))));
-}
-
-async function getPoisPayload(radiusKm: number): Promise<PoisPayload> {
-  const pois = await getPoisNearRoute(radiusKm);
-  return {
-    pois,
-    meta: {
-      radiusKm,
-      source: "overpass",
-      fetchedAt: new Date().toISOString()
-    }
-  };
 }
 
 export async function GET(request: Request): Promise<Response> {
